@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CRUDProdutos.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";    
+}
+
+<h2>Produtos</h2>
+<p>
+    @Html.ActionLink("+Novo Produto", "Create", "Produto", new { @class = "btn btn-success" })
+</p>
+@{
+    var valorTotal = ViewData["valorTotal"];
+}
+<p style="font-size: 18px; display: flex; align-items: flex-end; justify-content: flex-end">
+    <strong>Valor total do carrinho: @valorTotal</strong>
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.promocao.descricao)</th>
+        <th>@Html.DisplayNameFor(model => model.nome) </th>
+        <th>@Html.DisplayNameFor(model => model.quantidade)</th>
+        <th>@Html.DisplayNameFor(model => model.preco)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.promocao.descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.quantidade)</td>
+            <td>@Html.DisplayFor(modelItem => item.preco)</td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>
+

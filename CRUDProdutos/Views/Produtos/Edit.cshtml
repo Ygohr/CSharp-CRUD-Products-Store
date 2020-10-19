@@ -1,0 +1,62 @@
+﻿@model CRUDProdutos.Models.Produto
+@{
+    ViewBag.Title = "Edita Produto";
+}
+
+<h1>Editar Produto</h1>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(m => m.id)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.quantidade, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.quantidade, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.quantidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.preco, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.preco, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.preco, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.promocao.descricao, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.idPromocao,
+                                        new SelectList(ViewBag.Promocao, "idPromocao", "descricao"),
+                                       "Promoção", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.idPromocao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar alterações" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
